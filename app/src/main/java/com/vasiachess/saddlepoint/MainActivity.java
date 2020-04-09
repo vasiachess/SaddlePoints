@@ -50,27 +50,31 @@ public class MainActivity extends AppCompatActivity {
 
     private void onSolveClick() {
 
-        int[] minRowElements = rowsMins();
-        int[] maxColumnElements = columnsMaxs();
+        if (matrix != null) {
 
-        int[] maxRowElements = rowsMaxs();
-        int[] minColumnElements = columnsMins();
+            int[] minRowElements = rowsMins();
+            int[] maxColumnElements = columnsMaxs();
 
-        String saddles = "";
+            int[] maxRowElements = rowsMaxs();
+            int[] minColumnElements = columnsMins();
 
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                if ((matrix[i][j] == minRowElements[i]) && (matrix[i][j] == maxColumnElements[j])) {
-                    saddles = String.format("m[%d][%d]=%d; ", i, j, matrix[i][j]);
-                }
-                if ((matrix[i][j] == maxRowElements[i]) && (matrix[i][j] == minColumnElements[j])) {
-                    saddles = String.format("m[%d][%d]=%d; ", i, j, matrix[i][j]);
+            String saddles = "";
+
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[i].length; j++) {
+                    if ((matrix[i][j] == minRowElements[i]) && (matrix[i][j] == maxColumnElements[j])) {
+                        saddles = String.format("m[%d][%d]=%d; ", i, j, matrix[i][j]);
+                    }
+                    if ((matrix[i][j] == maxRowElements[i]) && (matrix[i][j] == minColumnElements[j])) {
+                        saddles = String.format("m[%d][%d]=%d; ", i, j, matrix[i][j]);
+                    }
                 }
             }
-        }
 
-        String result = TextUtils.isEmpty(saddles) ? "There are no saddle points" : "Saddle points: " + saddles;
-        tvResult.setText(result);
+            String result = TextUtils.isEmpty(saddles) ? "There are no saddle points" : "Saddle points: " + saddles;
+            tvResult.setText(result);
+
+        }
 
     }
 
